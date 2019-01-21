@@ -1,8 +1,23 @@
+import Client from '@cesarbr/knot-cloud-websocket';
+
 class Connector {
-  constructor(settings) { // eslint-disable-line no-useless-constructor, no-unused-vars
+  constructor(settings) {
+    const {
+      hostname, port, uuid, token,
+    } = settings;
+    this.client = new Client({
+      hostname, port, uuid, token,
+    });
   }
 
-  async start() { // eslint-disable-line no-empty-function
+  async start() {
+    return new Promise((resolve, reject) => {
+      this.client.connect();
+      this.client.once('ready', () => resolve());
+      this.client.once('error', () => {
+        reject(new Error('Connection not established.'));
+      });
+    });
   }
 
   async addDevice(device) { // eslint-disable-line no-empty-function, no-unused-vars
