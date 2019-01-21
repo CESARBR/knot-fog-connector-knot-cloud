@@ -1,5 +1,15 @@
 import Client from '@cesarbr/knot-cloud-websocket';
 
+function promisify(client, event, method, ...args) {
+  return new Promise((resolve, reject) => {
+    method(...args);
+    client.once(event, ret => resolve(ret));
+    client.once('error', (err) => {
+      reject(new Error(err));
+    });
+  });
+}
+
 class Connector {
   constructor(settings) {
     this.client = new Client({
@@ -10,14 +20,13 @@ class Connector {
     });
   }
 
+  isConnected() {
+    const { OPEN } = Object.getPrototypeOf(this.client.socket);
+    return this.client.socket.readyState === OPEN;
+  }
+
   async start() {
-    return new Promise((resolve, reject) => {
-      this.client.connect();
-      this.client.once('ready', () => resolve());
-      this.client.once('error', () => {
-        reject(new Error('Connection not established.'));
-      });
-    });
+    return promisify(this.client, 'ready', this.client.connect.bind(this.client));
   }
 
   async addDevice(device) { // eslint-disable-line no-empty-function, no-unused-vars
@@ -26,7 +35,11 @@ class Connector {
   async removeDevice(id) { // eslint-disable-line no-empty-function, no-unused-vars
   }
 
-  async listDevices() { // eslint-disable-line no-empty-function
+  async listDevices() {
+    if (this.isConnected()) {
+      return promisify(this.client, 'devices', this.client.getDevices.bind(this.client), { type: 'thing' });
+    }
+    throw Error('Connection not established.');
   }
 
   // Device (fog) to cloud
