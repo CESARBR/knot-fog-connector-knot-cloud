@@ -24,7 +24,10 @@ class Connector {
     return promisify(this.client, 'ready', this.client.connect.bind(this.client));
   }
 
-  async addDevice(device) { // eslint-disable-line no-empty-function, no-unused-vars
+  async addDevice(device) {
+    const properties = device;
+    properties.type = 'thing';
+    return promisify(this.client, 'registered', this.client.register.bind(this.client), properties);
   }
 
   async removeDevice(id) { // eslint-disable-line no-empty-function, no-unused-vars
