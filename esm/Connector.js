@@ -29,7 +29,13 @@ class Connector {
     return promisify(this.client, 'ready', this.client.connect.bind(this.client));
   }
 
-  async addDevice(device) { // eslint-disable-line no-empty-function, no-unused-vars
+  async addDevice(device) {
+    device.type = 'thing';
+    if (this.isConnected()) {
+      return promisify(this.client, 'registered', this.client.register.bind(this.client), device);
+    } else {
+      throw Error('Connection not established.');
+    }
   }
 
   async removeDevice(id) { // eslint-disable-line no-empty-function, no-unused-vars
