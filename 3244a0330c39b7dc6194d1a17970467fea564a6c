@@ -22,6 +22,30 @@
       "revId": "3244a0330c39b7dc6194d1a17970467fea564a6c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28851f9a_906b5f94",
+        "filename": "esm/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-01-23T23:21:35Z",
+      "side": 1,
+      "message": "I am make this verification because we can have control over the connector but we don\u0027t have about the server. The adapter can be stopped and the connection closed. And when adapter stay up again it won\u0027t connect again. \nIf this scenario occurs we at least will have an error message displayed in raspberry\u0027s syslog",
+      "parentUuid": "0e02826e_84b003d9",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "3244a0330c39b7dc6194d1a17970467fea564a6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
