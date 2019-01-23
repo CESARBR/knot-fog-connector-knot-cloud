@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e02826e_84b003d9",
+        "filename": "esm/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-01-23T12:31:57Z",
+      "side": 1,
+      "message": "Why are you doing this verification?\nThe library methods will be called only after connection is established.\nhttps://github.com/CESARBR/knot-fog-connector/blob/master/esm/index.js#L46\n\nEven if you want to ensure the client wasn\u0027t disconnected after the initial establishment, I think the best way would be to create a proxy to verify it before the method is called. This could be discussed in the future, what do you think?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "3244a0330c39b7dc6194d1a17970467fea564a6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
