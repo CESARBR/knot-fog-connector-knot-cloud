@@ -22,6 +22,30 @@
       "revId": "94eb003dd5703c53193ddece7b2782887aa82ba2",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7fe21fb_a1bc1e58",
+        "filename": "esm/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-01-23T12:43:02Z",
+      "side": 1,
+      "message": "https://eslint.org/docs/rules/no-param-reassign",
+      "parentUuid": "0b1d2be1_156d3ac1",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "94eb003dd5703c53193ddece7b2782887aa82ba2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
