@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c6182a15_17904d63",
+        "filename": "package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-01-24T13:45:55Z",
+      "side": 1,
+      "message": "Still have the postinstall script here.\nNeed to abandon the previous commit and remove from your local tree.",
+      "revId": "08e577439c1b85765780d2c3b9a18aabbca6c033",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
