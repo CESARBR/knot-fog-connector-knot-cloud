@@ -69,6 +69,30 @@
       "revId": "3244a0330c39b7dc6194d1a17970467fea564a6c",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60f5a478_8bc85059",
+        "filename": "esm/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-01-28T20:00:26Z",
+      "side": 1,
+      "message": "I know that. However, at least for me the best approach would be to work on reconnection mechanisms and other ways to deal with this problem. It\u0027s very weird do this verification in each method of the library, they should trust on the connection already treated.",
+      "parentUuid": "28851f9a_906b5f94",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 29
+      },
+      "revId": "3244a0330c39b7dc6194d1a17970467fea564a6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
     }
   ]
 }
