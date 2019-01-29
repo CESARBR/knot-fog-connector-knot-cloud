@@ -63,7 +63,11 @@ class Connector {
     return newDevice;
   }
 
-  async removeDevice(id) { // eslint-disable-line no-empty-function, no-unused-vars
+  async removeDevice(id) {
+    const thingClient = this.clientThings[id];
+    thingClient.close();
+    delete this.clientThings[id];
+    await promisify(this.client, 'unregistered', this.client.unregister.bind(this.client), id);
   }
 
   async listDevices() {
