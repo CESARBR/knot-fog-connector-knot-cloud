@@ -3,8 +3,9 @@
     [
       "env",
       {
+        "modules": false,
         "targets": {
-          "node": "current"
+          "node": "6"
         }
       }
     ]
