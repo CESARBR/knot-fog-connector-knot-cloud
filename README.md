@@ -1,2 +1,2 @@
-# knot-fog-connector-meshblu
-KNoT fog connector with meshblu 2.0 
+# knot-fog-connector-knot-cloud
+KNoT fog connector with KNoT Cloud.
