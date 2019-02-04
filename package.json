@@ -1,10 +1,10 @@
 {
-  "name": "knot-fog-connector-meshblu",
+  "name": "@cesarbr/knot-fog-connector-knot-cloud",
   "version": "0.1.0",
-  "description": "KNoT fog connector with meshblu 2.0",
+  "description": "KNoT fog connector with KNoT Cloud",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CESARBR/knot-fog-connector-meshblu.git"
+    "url": "git+https://github.com/CESARBR/knot-fog-connector-knot-cloud.git"
   },
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
