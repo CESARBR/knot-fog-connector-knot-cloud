@@ -12,7 +12,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
