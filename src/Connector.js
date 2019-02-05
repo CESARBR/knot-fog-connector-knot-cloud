@@ -34,7 +34,15 @@ class Connector {
   }
 
   async start() {
-    return promisify(this.client, 'ready', this.client.connect.bind(this.client));
+    await promisify(this.client, 'ready', this.client.connect.bind(this.client));
+    const devices = await this.listDevices();
+    this.clientThings = {};
+
+    for (const device of devices) {
+      const tmpClient = await this.createConnection(this.settings.uuid, this.settings.token);
+      this.clientThings[device.id] = await this.createConnection(device.uuid, await promisify(tmpClient, 'created', tmpClient.createSessionToken.bind(tmpClient), device.uuid));
+      tmpClient.close();
+    }
   }
 
   async addDevice(device) {
