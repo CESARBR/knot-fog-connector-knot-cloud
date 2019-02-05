@@ -83,7 +83,9 @@ class Connector {
     )));
   }
 
-  async updateSchema(id, schemaList) { // eslint-disable-line no-empty-function, no-unused-vars
+  async updateSchema(id, schemaList) {
+    const thingClient = this.clientThings[id];
+    return promisify(thingClient, 'schema', thingClient.updateSchema.bind(thingClient), schemaList);
   }
 
   async updateProperties(id, properties) { // eslint-disable-line no-empty-function, no-unused-vars
