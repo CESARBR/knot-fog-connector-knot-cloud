@@ -30,6 +30,14 @@ class Connector {
 
   async start() {
     this.client = await this.createConnection(this.settings.uuid, this.settings.token);
+    const devices = await this.listDevices();
+
+    for (const device of devices) {
+      const tmpClient = await this.createConnection(this.settings.uuid, this.settings.token);
+      const token = await promisify(tmpClient, 'created', tmpClient.createSessionToken.bind(tmpClient), device.uuid);
+      this.clientThings[device.id] = await this.createConnection(device.uuid, token);
+      tmpClient.close();
+    }
   }
 
   async addDevice(device) {
