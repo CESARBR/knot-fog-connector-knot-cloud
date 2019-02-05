@@ -1,4 +1,5 @@
 import Client from '@cesarbr/knot-cloud-websocket';
+import _ from 'lodash';
 
 function promisify(client, event, method, ...args) {
   return new Promise((resolve, reject) => {
@@ -28,8 +29,32 @@ class Connector {
     return client;
   }
 
+  async resetTokenAndConnect(device) {
+    const client = await this.createConnection(this.settings.uuid, this.settings.token);
+    let token;
+    try {
+      token = await promisify(client, 'created', client.createSessionToken.bind(client), device.id);
+    } catch (error) {
+      throw error;
+    } finally {
+      client.close();
+    }
+    return { id: device.id, client: await this.createConnection(device.id, token) };
+  }
+
   async start() {
-    this.client = await this.createConnection(this.settings.uuid, this.settings.token);
+    const { uuid, token } = this.settings;
+    this.client = await this.createConnection(uuid, token);
+    const devices = await this.listDevices();
+
+    const clients = await Promise.all(devices.map(device => (
+      this.resetTokenAndConnect(device)
+    )));
+
+    this.clientThings = _.chain(clients)
+      .keyBy('id')
+      .mapValues(value => value.client)
+      .value();
   }
 
   async addDevice(device) {
@@ -53,6 +78,7 @@ class Connector {
   }
 
   async updateSchema(id, schemaList) { // eslint-disable-line no-empty-function, no-unused-vars
+    return promisify(this.clientThings[id], 'schema', this.client.updateSchema.bind(this.clientThings[id]), schemaList);
   }
 
   async updateProperties(id, properties) { // eslint-disable-line no-empty-function, no-unused-vars
