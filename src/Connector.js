@@ -1,4 +1,5 @@
 import Client from '@cesarbr/knot-cloud-websocket';
+import _ from 'lodash';
 
 function promisify(client, event, method, ...args) {
   return new Promise((resolve, reject) => {
@@ -28,8 +29,21 @@ class Connector {
     return client;
   }
 
+  async resetTokenAndConnect(settings, device) {
+    const client = await this.createConnection(settings.uuid, settings.token);
+    const token = await promisify(client, 'created', client.createSessionToken.bind(client), device.id);
+    client.close();
+    return this.createConnection(device.id, token);
+  }
+
   async start() {
-    this.client = await this.createConnection(this.settings.uuid, this.settings.token);
+    const { uuid, token } = this.settings;
+    this.client = await this.createConnection(uuid, token);
+    const devices = await this.listDevices();
+
+    // eslint-disable-next-line max-len
+    const clients = await Promise.all(devices.map(device => this.resetTokenAndConnect(this.settings, device)));
+    this.clientThings = _.keyBy(clients, 'options.id');
   }
 
   async addDevice(device) {
