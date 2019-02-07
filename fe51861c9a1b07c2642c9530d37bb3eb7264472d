@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2f673e1_9ecc5c91",
+        "filename": "src/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-02-07T14:38:38Z",
+      "side": 1,
+      "message": "Break this in two lines in order to be more readable.\n\nconst token \u003d await promisify(tmpClient, \u0027created\u0027, tmpClient.createSessionToken.bind(tmpClient), device.uuid);\nthis.clientThings[device.id] \u003d await this.createConnection(device.uuid, token);",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 176
+      },
+      "revId": "fe51861c9a1b07c2642c9530d37bb3eb7264472d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
