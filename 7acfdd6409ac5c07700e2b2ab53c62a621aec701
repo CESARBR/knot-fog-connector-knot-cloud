@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74e36689_c86a9ff5",
+        "filename": "src/Connector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-07T21:09:40Z",
+      "side": 1,
+      "message": "You are recreating the same connection, which is discard right after multiple times. Can\u0027t you create the session tokens for all devices using a single connection (`this.client` above)?",
+      "range": {
+        "startLine": 35,
+        "startChar": 34,
+        "endLine": 35,
+        "endChar": 96
+      },
+      "revId": "7acfdd6409ac5c07700e2b2ab53c62a621aec701",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1a8ea50_0821267b",
+        "filename": "src/Connector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-07T21:09:40Z",
+      "side": 1,
+      "message": "Don\u0027t you need to return the promise, so that who is starting the connector waits until all connections are established? Also, if a connection fails, it will throw an unhandled promise rejection notice.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 15
+      },
+      "revId": "7acfdd6409ac5c07700e2b2ab53c62a621aec701",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e60d9777_8b9503d4",
+        "filename": "src/Connector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-07T21:09:40Z",
+      "side": 1,
+      "message": "This is very hard to understand and maintain because it has related operations happening in two parts (the first promise.all and the second promise.all) and there is this promise chaining that is supposed to be avoided with async-await. This chaining leads to hard to read code.\n\nCan you rewrite it putting all the operations for a device together. One suggestion is to create a method that creates the token and the connection for each device to be used here (only here you would have the loop). Something like:\n\nasync resetTokenAndConnect(device) {\n  cred \u003d await createToken;\n  return await createConnection(...)\n}",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 9
+      },
+      "revId": "7acfdd6409ac5c07700e2b2ab53c62a621aec701",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
