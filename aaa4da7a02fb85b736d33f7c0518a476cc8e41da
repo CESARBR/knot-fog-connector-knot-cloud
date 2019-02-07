@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbbf3ee8_7cfe66c9",
+        "filename": "src/Connector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-02-07T14:38:31Z",
+      "side": 1,
+      "message": "I think you could create the main connection (gateway client) in the `start()` method by reusing the new `createConnection` method().\n\ne.g\n```\nconstructor(settings) {\n  this.settings \u003d settings;\n  this.client \u003d null;\n  this.clientThings \u003d {};\n}\n\nasync start() {\n  this.client \u003d await this.createConnection(this.settings.uuid, this.settings.token);\n}\n```",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 7
+      },
+      "revId": "aaa4da7a02fb85b736d33f7c0518a476cc8e41da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ab43aac_0b3a0071",
+        "filename": "src/Connector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-02-07T14:38:31Z",
+      "side": 1,
+      "message": "`createConnection` is an async function, should it not be called with `await`?",
+      "range": {
+        "startLine": 44,
+        "startChar": 38,
+        "endLine": 44,
+        "endChar": 93
+      },
+      "revId": "aaa4da7a02fb85b736d33f7c0518a476cc8e41da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
