@@ -27,6 +27,6 @@
     "rollup-plugin-babel": "^3.0.7"
   },
   "dependencies": {
-    "@cesarbr/knot-cloud-websocket": "^0.2.0"
+    "@cesarbr/knot-cloud-websocket": "^0.4.1"
   }
 }
