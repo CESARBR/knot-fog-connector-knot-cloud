@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a3697bb8_04dba38e",
+        "filename": "src/Connector.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-08T18:46:57Z",
+      "side": 1,
+      "message": "I see. Ok, but remember to close the connection.",
+      "parentUuid": "f0293a91_6b7e7df7",
+      "range": {
+        "startLine": 35,
+        "startChar": 34,
+        "endLine": 35,
+        "endChar": 96
+      },
+      "revId": "7acfdd6409ac5c07700e2b2ab53c62a621aec701",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e60d9777_8b9503d4",
         "filename": "src/Connector.js",
         "patchSetId": 3
