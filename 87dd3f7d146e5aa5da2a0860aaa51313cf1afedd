@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a5bd5dbc_e2ecec05",
+        "filename": "package.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-08T20:39:42Z",
+      "side": 1,
+      "message": "Update to 0.4.1, but in a different patch (or is this needed for the add?)",
+      "range": {
+        "startLine": 30,
+        "startChar": 39,
+        "endLine": 30,
+        "endChar": 44
+      },
+      "revId": "87dd3f7d146e5aa5da2a0860aaa51313cf1afedd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a275ba39_f94a6544",
         "filename": "src/Connector.js",
         "patchSetId": 4
@@ -13,6 +36,30 @@
       "writtenOn": "2019-02-07T20:41:27Z",
       "side": 1,
       "message": "Should we update to id?",
+      "range": {
+        "startLine": 32,
+        "startChar": 60,
+        "endLine": 32,
+        "endChar": 64
+      },
+      "revId": "87dd3f7d146e5aa5da2a0860aaa51313cf1afedd",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e16817fd_806a9a60",
+        "filename": "src/Connector.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-08T20:39:42Z",
+      "side": 1,
+      "message": "Yeap, but i think it fits another patch (perhaps the one you update the library).",
+      "parentUuid": "a275ba39_f94a6544",
       "range": {
         "startLine": 32,
         "startChar": 60,
