@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd6eba58_3c39970e",
+        "filename": "package-lock.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-08T20:27:15Z",
+      "side": 1,
+      "message": "Remove this. Add when you change package.json",
+      "revId": "d391c7922c05006a6c576ae84661bd2f9c3ff111",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
