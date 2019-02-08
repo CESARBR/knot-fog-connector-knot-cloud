@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b64f7adf_0362219d",
+        "filename": "package.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-08T20:40:45Z",
+      "side": 1,
+      "message": "Create only one patch, apart from the others, where you update to v0.4.1",
+      "revId": "1c3b37b919ecdb37bb2d212f242a6f70ff6bafae",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
