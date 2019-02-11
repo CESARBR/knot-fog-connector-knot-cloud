@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd5dc6a0_25ac522b",
+        "filename": "src/Connector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-11T14:49:54Z",
+      "side": 1,
+      "message": "Did you have any problem using `this`? I thought the newer versions of JS had solved this problem so you didn\u0027t need to create the `self` variable.",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 22
+      },
+      "revId": "4d65f3cd390052665742ba5639f039826d5fcc08",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4925a649_ffa09574",
+        "filename": "src/Connector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-11T14:49:54Z",
+      "side": 1,
+      "message": "This operation is part of resetTokenAndConnect, isn\u0027t it? Can\u0027t it be part of that method?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 93
+      },
+      "revId": "4d65f3cd390052665742ba5639f039826d5fcc08",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4207daa_c81dd879",
+        "filename": "src/Connector.js",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-11T14:49:54Z",
+      "side": 1,
+      "message": "Same about `client.close()`",
+      "range": {
+        "startLine": 46,
+        "startChar": 6,
+        "endLine": 46,
+        "endChar": 21
+      },
+      "revId": "4d65f3cd390052665742ba5639f039826d5fcc08",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
