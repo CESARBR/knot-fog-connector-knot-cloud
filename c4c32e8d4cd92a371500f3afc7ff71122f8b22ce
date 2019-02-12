@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e11b4f22_bec3d458",
+        "filename": "src/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-02-12T21:22:27Z",
+      "side": 1,
+      "message": "this convertion is need because fog is send the sensorId as string",
+      "range": {
+        "startLine": 78,
+        "startChar": 148,
+        "endLine": 78,
+        "endChar": 169
+      },
+      "revId": "c4c32e8d4cd92a371500f3afc7ff71122f8b22ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
