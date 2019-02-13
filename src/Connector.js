@@ -5,7 +5,7 @@ class Connector {
     this.client = new Client({
       hostname: settings.hostname,
       port: settings.port,
-      uuid: settings.uuid,
+      id: settings.uuid,
       token: settings.token,
     });
   }
