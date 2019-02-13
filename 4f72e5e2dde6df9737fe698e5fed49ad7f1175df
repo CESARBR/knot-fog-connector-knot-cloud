@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7980018c_866117f2",
+        "filename": "src/Connector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-02-13T16:41:30Z",
+      "side": 1,
+      "message": "I think this isn\u0027t necessary anymore since the `sensorId` will be converted to number in the connector service.",
+      "range": {
+        "startLine": 78,
+        "startChar": 148,
+        "endLine": 78,
+        "endChar": 169
+      },
+      "revId": "4f72e5e2dde6df9737fe698e5fed49ad7f1175df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edc6d1fc_a274bc84",
+        "filename": "src/Connector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2019-02-13T16:41:30Z",
+      "side": 1,
+      "message": "Line too long and not readable, it\u0027d be better to break it.",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 185
+      },
+      "revId": "4f72e5e2dde6df9737fe698e5fed49ad7f1175df",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
