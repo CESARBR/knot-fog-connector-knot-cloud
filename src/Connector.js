@@ -29,6 +29,20 @@ class Connector {
     return client;
   }
 
+  async listenToCommands(id, client) {
+    client.on('command', (cmd) => {
+      let args;
+      switch (cmd.payload.name) {
+        case 'getData':
+          ({ args } = cmd.payload);
+          args.forEach(sensorId => this.onDataRequestedCb(id, sensorId));
+          break;
+        default:
+          throw Error(`Unrecognized command ${cmd.payload.name}`);
+      }
+    });
+  }
+
   async resetTokenAndConnect(device) {
     const client = await this.createConnection(this.settings.uuid, this.settings.token);
     let token;
@@ -37,11 +51,16 @@ class Connector {
     } finally {
       client.close();
     }
-    return { id: device.id, client: await this.createConnection(device.id, token) };
+
+    const thingClient = await this.createConnection(device.id, token);
+    await this.listenToCommands(device.id, thingClient);
+
+    return { id: device.id, client: thingClient };
   }
 
   async start() {
     const { uuid, token } = this.settings;
+    this.onDataRequestedCb = _.noop();
     this.client = await this.createConnection(uuid, token);
     const devices = await this.listDevices();
 
@@ -102,7 +121,8 @@ class Connector {
   }
 
   // cb(event) where event is { id, sensorId }
-  async onDataRequested(cb) { // eslint-disable-line no-empty-function, no-unused-vars
+  async onDataRequested(cb) {
+    this.onDataRequestedCb = cb;
   }
 
   // cb(event) where event is { id, sensorId, data }
