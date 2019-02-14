@@ -43,6 +43,7 @@ class Connector {
   async start() {
     const { uuid, token } = this.settings;
     this.onDataRequestedCb = _.noop();
+    this.onDataUpdatedCb = _.noop();
     this.client = await this.createConnection(uuid, token);
     const devices = await this.listDevices();
 
@@ -56,6 +57,10 @@ class Connector {
         case 'getData':
           ({ args } = cmd.payload);
           args.forEach(sensorId => this.onDataRequestedCb(value.id, sensorId));
+          break;
+        case 'setData':
+          ({ args } = cmd.payload);
+          args.forEach(({ sensorId, data }) => this.onDataRequestedCb(value.id, sensorId, data));
           break;
         default:
           throw Error(`Unrecognized command ${cmd.payload.name}`);
@@ -114,7 +119,8 @@ class Connector {
   }
 
   // cb(event) where event is { id, sensorId, data }
-  async onDataUpdated(cb) { // eslint-disable-line no-empty-function, no-unused-vars
+  async onDataUpdated(cb) {
+    this.onDataUpdatedCb = cb;
   }
 }
 
