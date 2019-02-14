@@ -22,6 +22,30 @@
       "revId": "89296fb62264e7a8641b3cba2f16a46298206474",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df9eca65_a6470495",
+        "filename": "src/Connector.js",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-02-14T12:14:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61d26a62_eb9f50dd",
+      "range": {
+        "startLine": 37,
+        "startChar": 3,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "89296fb62264e7a8641b3cba2f16a46298206474",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
