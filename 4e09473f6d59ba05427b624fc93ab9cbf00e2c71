@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5cc7898_5a77ad30",
+        "filename": "src/Connector.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-02-15T19:06:36Z",
+      "side": 1,
+      "message": "Keep the same pattern you chose to go with in the start() method.",
+      "range": {
+        "startLine": 33,
+        "startChar": 46,
+        "endLine": 33,
+        "endChar": 88
+      },
+      "revId": "4e09473f6d59ba05427b624fc93ab9cbf00e2c71",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ddd68c1_436b82dc",
+        "filename": "src/Connector.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-02-15T19:06:36Z",
+      "side": 1,
+      "message": "Either keep it as it was before or do this change in the previous patch.\nSince this change is not required for this to work, it\u0027s only aesthetic, I don\u0027t think should be done here.",
+      "range": {
+        "startLine": 44,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 42
+      },
+      "revId": "4e09473f6d59ba05427b624fc93ab9cbf00e2c71",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c4849f8_318089b9",
+        "filename": "src/Connector.js",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-02-15T19:06:36Z",
+      "side": 1,
+      "message": "Since you\u0027re chaining several operations, what do you think about explain what is the expected output after this operations and/or what you\u0027re doing.",
+      "revId": "4e09473f6d59ba05427b624fc93ab9cbf00e2c71",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
