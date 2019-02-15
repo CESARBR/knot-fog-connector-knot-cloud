@@ -72,6 +72,54 @@
     },
     {
       "key": {
+        "uuid": "6f8be0f4_dc687a7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-02-15T20:19:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcc2dfd7_1de46d9b",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74073ce8_09d4a101",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-02-15T20:19:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7fbdbbc_6cd9990b",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7892c9bc_771241a3",
         "filename": "src/Connector.js",
         "patchSetId": 1
@@ -83,6 +131,30 @@
       "writtenOn": "2019-02-15T19:14:44Z",
       "side": 1,
       "message": "The on prefix already indicates it\u0027s a callback, no (I think you taught me that :P)?",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bcef66a_f59c4c6a",
+        "filename": "src/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-02-15T20:19:02Z",
+      "side": 1,
+      "message": "That\u0027s because we already have a method named onDataRequested\nAnd it represents a callback that comes from connector base.\nI got this name from connector-fiware",
+      "parentUuid": "7892c9bc_771241a3",
       "range": {
         "startLine": 45,
         "startChar": 9,
@@ -139,6 +211,30 @@
       "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ea41998_b8c2e23f",
+        "filename": "src/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2019-02-15T20:19:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0973b88f_eab0340c",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
