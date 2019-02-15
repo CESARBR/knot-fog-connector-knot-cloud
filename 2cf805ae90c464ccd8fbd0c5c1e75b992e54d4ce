@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dec19fb_b5c64c71",
+        "filename": "src/Connector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-15T23:13:27Z",
+      "side": 1,
+      "message": "Same about the API change.",
+      "range": {
+        "startLine": 42,
+        "startChar": 10,
+        "endLine": 44,
+        "endChar": 13
+      },
+      "revId": "2cf805ae90c464ccd8fbd0c5c1e75b992e54d4ce",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
