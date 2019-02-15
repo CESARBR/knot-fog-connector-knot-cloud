@@ -48,6 +48,53 @@
     },
     {
       "key": {
+        "uuid": "d7fbdbbc_6cd9990b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-02-15T19:14:44Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8fc0eadf_fb4d7752",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7892c9bc_771241a3",
+        "filename": "src/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-02-15T19:14:44Z",
+      "side": 1,
+      "message": "The on prefix already indicates it\u0027s a callback, no (I think you taught me that :P)?",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab9a1b5_930e9c17",
         "filename": "src/Connector.js",
         "patchSetId": 1
@@ -88,6 +135,29 @@
         "startChar": 29,
         "endLine": 53,
         "endChar": 61
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92bee551_32f8c8f5",
+        "filename": "src/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1015148
+      },
+      "writtenOn": "2019-02-15T19:14:44Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 113,
+        "startChar": 9,
+        "endLine": 113,
+        "endChar": 26
       },
       "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
