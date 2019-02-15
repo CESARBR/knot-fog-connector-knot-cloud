@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "dcc2dfd7_1de46d9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-15T13:53:43Z",
+      "side": 1,
+      "message": "invert",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fc0eadf_fb4d7752",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-15T13:53:43Z",
+      "side": 1,
+      "message": "There is a connector missing between \"command getData\" and \"onDataRequested\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9ab9a1b5_930e9c17",
         "filename": "src/Connector.js",
         "patchSetId": 1
@@ -13,6 +59,30 @@
       "writtenOn": "2019-02-14T20:34:14Z",
       "side": 1,
       "message": "This callback couldn\u0027t be registered on the thing client creation (map iteration did above)? In addition, you can separate this in another function/method in order to keep `start()` small.",
+      "range": {
+        "startLine": 53,
+        "startChar": 29,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "377e25449bd5097827b8fa05c455cf9873503b69",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0973b88f_eab0340c",
+        "filename": "src/Connector.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-15T13:53:43Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "9ab9a1b5_930e9c17",
       "range": {
         "startLine": 53,
         "startChar": 29,
