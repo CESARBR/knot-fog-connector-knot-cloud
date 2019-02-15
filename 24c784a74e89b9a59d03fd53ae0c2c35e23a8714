@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfbde144_fbad6795",
+        "filename": "src/Connector.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2019-02-15T23:13:02Z",
+      "side": 1,
+      "message": "This API is changing (see my patch in review). onDataRequested will receive an array of ids, so there is no need to make this loop (also I\u0027m afraid this can cause concurrency problems).",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 73
+      },
+      "revId": "24c784a74e89b9a59d03fd53ae0c2c35e23a8714",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
