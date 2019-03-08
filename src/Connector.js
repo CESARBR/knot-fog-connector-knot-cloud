@@ -49,15 +49,15 @@ class Connector {
     const client = await this.createConnection(this.settings.uuid, this.settings.token);
     let token;
     try {
-      token = await promisify(client, 'created', client.createSessionToken.bind(client), device.id);
+      token = await promisify(client, 'created', client.createSessionToken.bind(client), device.knot.id);
     } finally {
       client.close();
     }
 
-    const thingClient = await this.createConnection(device.id, token);
-    await this.listenToCommands(device.id, thingClient);
+    const thingClient = await this.createConnection(device.knot.id, token);
+    await this.listenToCommands(device.knot.id, thingClient);
 
-    return { id: device.id, client: thingClient };
+    return { id: device.knot.id, client: thingClient };
   }
 
   async start() {
@@ -66,7 +66,6 @@ class Connector {
     this.onDataUpdatedCb = _.noop();
     this.client = await this.createConnection(uuid, token);
     const devices = await this.listDevices();
-
     const clients = await Promise.all(devices.map(device => (
       this.resetTokenAndConnect(device)
     )));
@@ -81,7 +80,10 @@ class Connector {
     const properties = device;
     properties.type = 'knot:thing';
     const newDevice = await promisify(this.client, 'registered', this.client.register.bind(this.client), properties);
-    this.clientThings[newDevice.id] = await this.createConnection(newDevice.uuid, newDevice.token);
+    this.clientThings[newDevice.knot.id] = await this.createConnection(
+      newDevice.knot.id,
+      newDevice.token,
+    );
     return newDevice;
   }
 
