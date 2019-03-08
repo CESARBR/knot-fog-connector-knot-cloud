@@ -79,7 +79,7 @@ class Connector {
 
   async addDevice(device) {
     const properties = device;
-    properties.type = 'thing';
+    properties.type = 'knot:thing';
     const newDevice = await promisify(this.client, 'registered', this.client.register.bind(this.client), properties);
     this.clientThings[newDevice.id] = await this.createConnection(newDevice.uuid, newDevice.token);
     return newDevice;
@@ -93,7 +93,7 @@ class Connector {
   }
 
   async listDevices() {
-    return promisify(this.client, 'devices', this.client.getDevices.bind(this.client), { type: 'thing' });
+    return promisify(this.client, 'devices', this.client.getDevices.bind(this.client), { type: 'knot:thing' });
   }
 
   // Device (fog) to cloud
