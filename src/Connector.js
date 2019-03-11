@@ -112,18 +112,7 @@ class Connector {
     return promisify(thingClient, 'schema', thingClient.updateSchema.bind(thingClient), schemaList);
   }
 
-  async updateProperties(id, properties) { // eslint-disable-line no-empty-function, no-unused-vars
-  }
-
   // Cloud to device (fog)
-
-  // cb(event) where event is { id, config: [{}] }
-  async onConfigUpdated(cb) { // eslint-disable-line no-empty-function, no-unused-vars
-  }
-
-  // cb(event) where event is { id, properties: {} }
-  async onPropertiesUpdated(cb) { // eslint-disable-line no-empty-function, no-unused-vars
-  }
 
   // cb(event) where event is { id, sensorId }
   async onDataRequested(cb) {
