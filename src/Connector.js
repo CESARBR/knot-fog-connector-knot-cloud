@@ -11,6 +11,14 @@ function promisify(client, event, method, ...args) {
   });
 }
 
+function mapCloudDeviceToConnectorDevice(device) {
+  return {
+    id: device.knot.id,
+    name: device.metadata.name,
+    schema: device.schema,
+  };
+}
+
 class Connector {
   constructor(settings) {
     this.settings = settings;
@@ -45,19 +53,19 @@ class Connector {
     });
   }
 
-  async resetTokenAndConnect(device) {
+  async resetTokenAndConnect(id) {
     const client = await this.createConnection(this.settings.uuid, this.settings.token);
     let token;
     try {
-      token = await promisify(client, 'created', client.createSessionToken.bind(client), device.knot.id);
+      token = await promisify(client, 'created', client.createSessionToken.bind(client), id);
     } finally {
       client.close();
     }
 
-    const thingClient = await this.createConnection(device.knot.id, token);
-    await this.listenToCommands(device.knot.id, thingClient);
+    const thingClient = await this.createConnection(id, token);
+    await this.listenToCommands(id, thingClient);
 
-    return { id: device.knot.id, client: thingClient };
+    return { id, client: thingClient };
   }
 
   async start() {
@@ -67,7 +75,7 @@ class Connector {
     this.client = await this.createConnection(uuid, token);
     const devices = await this.listDevices();
     const clients = await Promise.all(devices.map(device => (
-      this.resetTokenAndConnect(device)
+      this.resetTokenAndConnect(device.id)
     )));
 
     this.clientThings = _.chain(clients)
@@ -84,7 +92,6 @@ class Connector {
       newDevice.knot.id,
       newDevice.token,
     );
-    return newDevice;
   }
 
   async removeDevice(id) {
@@ -95,7 +102,8 @@ class Connector {
   }
 
   async listDevices() {
-    return promisify(this.client, 'devices', this.client.getDevices.bind(this.client), { type: 'knot:thing' });
+    const devices = await promisify(this.client, 'devices', this.client.getDevices.bind(this.client), { type: 'knot:thing' });
+    return devices.map(mapCloudDeviceToConnectorDevice);
   }
 
   // Device (fog) to cloud
