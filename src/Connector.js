@@ -114,12 +114,12 @@ class Connector {
 
   // Cloud to device (fog)
 
-  // cb(event) where event is { id, sensorId }
+  // cb(event) where event is { id, sensorIds }
   async onDataRequested(cb) {
     this.onDataRequestedCb = cb;
   }
 
-  // cb(event) where event is { id, sensorId, data }
+  // cb(event) where event is { id, data }
   async onDataUpdated(cb) {
     this.onDataUpdatedCb = cb;
   }
