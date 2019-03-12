@@ -75,11 +75,11 @@ class Connector {
     this.client = await this.createConnection(uuid, token);
     const devices = await this.listDevices();
     const clients = await Promise.all(devices.map(device => (
-      this.resetTokenAndConnect(device.id)
+      this.resetTokenAndConnect(device.knot.id)
     )));
 
     this.clientThings = _.chain(clients)
-      .keyBy('id')
+      .keyBy('knot.id')
       .mapValues(value => value.client)
       .value();
   }
