@@ -1,6 +1,6 @@
 {
   "name": "@cesarbr/knot-fog-connector-knot-cloud",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "KNoT fog connector with KNoT Cloud",
   "repository": {
     "type": "git",
