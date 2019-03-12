@@ -88,10 +88,12 @@ class Connector {
     const properties = device;
     properties.type = 'knot:thing';
     const newDevice = await promisify(this.client, 'registered', this.client.register.bind(this.client), properties);
-    this.clientThings[newDevice.knot.id] = await this.createConnection(
+    const client = await this.createConnection(
       newDevice.knot.id,
       newDevice.token,
     );
+    this.clientThings[newDevice.knot.id] = client;
+    this.listenToCommands(newDevice.knot.id, client);
   }
 
   async removeDevice(id) {
