@@ -113,7 +113,7 @@ class Connector {
   async publishData(id, dataList) {
     const client = this.clientThings[id];
     return Promise.all(dataList.map(data => (
-      promisify(client, 'data', client.publishData.bind(client), data.sensorId, data.value)
+      promisify(client, 'published', client.publishData.bind(client), data.sensorId, data.value)
     )));
   }
 
