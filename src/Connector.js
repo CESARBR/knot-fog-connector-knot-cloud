@@ -53,6 +53,11 @@ class Connector {
     });
   }
 
+  listenToConnectionStatus(client) {
+    client.on('reconnect', () => this.onDisconnectedCb());
+    client.on('ready', () => this.onReconnectedCb());
+  }
+
   async resetTokenAndConnect(id) {
     const client = await this.createConnection(this.settings.uuid, this.settings.token);
     let token;
@@ -72,7 +77,10 @@ class Connector {
     const { uuid, token } = this.settings;
     this.onDataRequestedCb = _.noop();
     this.onDataUpdatedCb = _.noop();
+    this.onDisconnectedCb = _.noop();
+    this.onReconnectedCb = _.noop();
     this.client = await this.createConnection(uuid, token);
+    this.listenToConnectionStatus(this.client);
     const devices = await this.listDevices();
     const clients = await Promise.all(devices.map(device => (
       this.resetTokenAndConnect(device.id)
@@ -132,6 +140,16 @@ class Connector {
   // cb(event) where event is { id, data }
   async onDataUpdated(cb) {
     this.onDataUpdatedCb = cb;
+  }
+
+  // Connection callbacks
+
+  async onDisconnected(cb) {
+    this.onDisconnectedCb = cb;
+  }
+
+  async onReconnected(cb) {
+    this.onReconnectedCb = cb;
   }
 }
 
