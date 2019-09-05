@@ -114,6 +114,15 @@ class Connector {
     this.listenToCommands(newDevice.knot.id, client);
   }
 
+  async authDevice(id, token) {
+    try {
+      await this.createConnection(id, token);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   async removeDevice(id) {
     const thingClient = this.clientThings[id];
     thingClient.close();
