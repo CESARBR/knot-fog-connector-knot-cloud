@@ -102,6 +102,7 @@ class Connector {
     );
     this.clientThings[newDevice.knot.id] = client;
     this.listenToCommands(newDevice.knot.id, client);
+    return { id: newDevice.knot.id, token: newDevice.token };
   }
 
   async removeDevice(id) {
