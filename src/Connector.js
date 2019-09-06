@@ -26,6 +26,55 @@ class Connector {
     this.clientThings = {};
   }
 
+  async start() {
+    this.onDataRequestedCb = _.noop();
+    this.onDataUpdatedCb = _.noop();
+    this.onDisconnectedCb = _.noop();
+    this.onReconnectedCb = _.noop();
+
+    await this.connectGateway();
+    await this.connectThings();
+  }
+
+  async connectGateway() {
+    const { uuid, token } = this.settings;
+    this.client = await this.createConnection(uuid, token);
+    this.listenToConnectionStatus();
+  }
+
+  listenToConnectionStatus() {
+    this.client.on('reconnect', () => this.onDisconnectedCb());
+    this.client.on('ready', () => this.onReconnectedCb());
+  }
+
+  async connectThings() {
+    const things = await this.listDevices();
+    const connections = await Promise.all(things.map(thing => this.setupThingConnection(thing.id)));
+    this.clientThings = _.chain(connections)
+      .filter(value => value.client)
+      .keyBy('id')
+      .mapValues(value => value.client)
+      .value();
+  }
+
+  async setupThingConnection(id) {
+    const gatewayClient = await this.createConnection(this.settings.uuid, this.settings.token);
+    try {
+      const thingClient = await this.resetTokenAndConnect(gatewayClient, id);
+      await this.listenToCommands(id, thingClient);
+      return { id, client: thingClient };
+    } catch (err) {
+      return { id };
+    } finally {
+      gatewayClient.close();
+    }
+  }
+
+  async resetTokenAndConnect(client, id) {
+    const token = await promisify(client, 'created', client.createSessionToken.bind(client), id);
+    return this.createConnection(id, token);
+  }
+
   async createConnection(id, token) {
     const client = new Client({
       hostname: this.settings.hostname,
@@ -51,45 +100,6 @@ class Connector {
           throw Error(`Unrecognized command ${name}`);
       }
     });
-  }
-
-  listenToConnectionStatus(client) {
-    client.on('reconnect', () => this.onDisconnectedCb());
-    client.on('ready', () => this.onReconnectedCb());
-  }
-
-  async resetTokenAndConnect(id) {
-    const client = await this.createConnection(this.settings.uuid, this.settings.token);
-    let token;
-    try {
-      token = await promisify(client, 'created', client.createSessionToken.bind(client), id);
-    } finally {
-      client.close();
-    }
-
-    const thingClient = await this.createConnection(id, token);
-    await this.listenToCommands(id, thingClient);
-
-    return { id, client: thingClient };
-  }
-
-  async start() {
-    const { uuid, token } = this.settings;
-    this.onDataRequestedCb = _.noop();
-    this.onDataUpdatedCb = _.noop();
-    this.onDisconnectedCb = _.noop();
-    this.onReconnectedCb = _.noop();
-    this.client = await this.createConnection(uuid, token);
-    this.listenToConnectionStatus(this.client);
-    const devices = await this.listDevices();
-    const clients = await Promise.all(devices.map(device => (
-      this.resetTokenAndConnect(device.id)
-    )));
-
-    this.clientThings = _.chain(clients)
-      .keyBy('id')
-      .mapValues(value => value.client)
-      .value();
   }
 
   async addDevice(device) {
