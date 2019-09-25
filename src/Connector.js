@@ -29,6 +29,7 @@ class Connector {
   async start() {
     this.onDataRequestedCb = _.noop();
     this.onDataUpdatedCb = _.noop();
+    this.onDeviceUnregisteredCb = _.noop();
     this.onDisconnectedCb = _.noop();
     this.onReconnectedCb = _.noop();
 
@@ -126,8 +127,12 @@ class Connector {
 
   async removeDevice(id) {
     const thingClient = this.clientThings[id];
-    thingClient.close();
-    delete this.clientThings[id];
+    if (thingClient) {
+      thingClient.close();
+      delete this.clientThings[id];
+    }
+
+    this.client.once('unregistered', () => this.onDeviceUnregisteredCb(id));
     await promisify(this.client, 'unregistered', this.client.unregister.bind(this.client), id);
   }
 
@@ -160,6 +165,11 @@ class Connector {
   // cb(event) where event is { id, data }
   async onDataUpdated(cb) {
     this.onDataUpdatedCb = cb;
+  }
+
+  // cb(event) where event is { id }
+  async onDeviceUnregistered(cb) {
+    this.onDeviceUnregisteredCb = cb;
   }
 
   // Connection callbacks
