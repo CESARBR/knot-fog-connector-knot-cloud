@@ -1,3 +1,20 @@
+# [2.0.0](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v1.1.0...v2.0.0)
+
+### Features
+
+- Implement authDevice method.
+- Implement onDeviceUnregistered callback.
+
+### Bug Fixes
+
+- Avoid crashing the service when can't connect to a specific thing.
+
+### Improvements
+
+- Update the register method to return the device credentials.
+- Add pull request template.
+- Update knot-cloud-websocket to v1.1.3.
+
 # [1.1.0](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v1.0.2...v1.1.0)
 
 ### Features
