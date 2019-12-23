@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@cesarbr/knot-cloud-websocket": "^1.1.3",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   },
   "pre-commit": [
     "lint"
