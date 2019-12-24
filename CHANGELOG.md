@@ -1,3 +1,14 @@
+# [2.0.1](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v2.0.0...v2.0.1)
+
+### Bug Fixes
+
+- Update dependency lodash to v4.17.13
+- Update dependency mixin-deep to v1.3.2
+- Update dependency set-value to v2.0.1
+- Update dependency union-value to v1.0.1
+- Update dependency eslint-utils to v1.4.3
+- Add dependency eslint-visitor-keys at v1.1.0
+
 # [2.0.0](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v1.1.0...v2.0.0)
 
 ### Features
