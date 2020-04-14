@@ -85,14 +85,7 @@ class Connector {
   }
 
   async removeDevice(id) {
-    const thingClient = this.clientThings[id];
-    if (thingClient) {
-      thingClient.close();
-      delete this.clientThings[id];
-    }
-
-    this.client.once('unregistered', () => this.onDeviceUnregisteredCb(id));
-    await promisify(this.client, 'unregistered', this.client.unregister.bind(this.client), id);
+    await this.client.unregister(id);
   }
 
   async listDevices() {
