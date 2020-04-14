@@ -96,10 +96,7 @@ class Connector {
   // Device (fog) to cloud
 
   async publishData(id, dataList) {
-    const client = this.clientThings[id];
-    return Promise.all(dataList.map(data => (
-      promisify(client, 'published', client.publishData.bind(client), data.sensorId, data.value)
-    )));
+    return this.client.publishData(id, dataList);
   }
 
   async updateSchema(id, schemaList) {
