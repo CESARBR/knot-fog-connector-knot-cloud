@@ -78,13 +78,10 @@ class Connector {
     return { id: newDevice.knot.id, token: newDevice.token };
   }
 
+  // eslint-disable-next-line no-unused-vars
   async authDevice(id, token) {
-    try {
-      await this.createConnection(id, token);
-      return true;
-    } catch (err) {
-      return false;
-    }
+    const devices = await this.listDevices();
+    return !!devices.find((device) => device.id === id);
   }
 
   async removeDevice(id) {
