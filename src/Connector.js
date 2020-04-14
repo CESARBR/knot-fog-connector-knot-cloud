@@ -13,8 +13,8 @@ function promisify(client, event, method, ...args) {
 
 function mapCloudDeviceToConnectorDevice(device) {
   return {
-    id: device.knot.id,
-    name: device.metadata.name,
+    id: device.id,
+    name: device.name,
     schema: device.schema,
   };
 }
@@ -131,8 +131,8 @@ class Connector {
   }
 
   async listDevices() {
-    const devices = await promisify(this.client, 'devices', this.client.getDevices.bind(this.client), { type: 'knot:thing' });
-    return devices.map(mapCloudDeviceToConnectorDevice);
+    const { devices } = await this.client.getDevices();
+    return devices.map(mapCloudDeviceToConnectorDevice) || [];
   }
 
   // Device (fog) to cloud
