@@ -1,4 +1,4 @@
-import Client from '@cesarbr/knot-cloud-websocket';
+import Client from '@cesarbr/knot-cloud-sdk-js-amqp';
 import _ from 'lodash';
 
 function promisify(client, event, method, ...args) {
@@ -33,19 +33,24 @@ class Connector {
   }
 
   async start() {
-    await this.connectGateway();
+    await this.connectClient();
     await this.connectThings();
   }
 
-  async connectGateway() {
-    const { uuid, token } = this.settings;
-    this.client = await this.createConnection(uuid, token);
+  async connectClient() {
+    this.client = await this.createConnection();
     this.listenToConnectionStatus();
   }
 
+  async createConnection() {
+    const client = new Client(this.settings);
+    await client.connect();
+    return client;
+  }
+
   listenToConnectionStatus() {
-    this.client.on('reconnect', () => this.onDisconnectedCb());
-    this.client.on('ready', () => this.onReconnectedCb());
+    this.client.on('close', () => this.onDisconnectedCb());
+    this.client.on('connect', () => this.onReconnectedCb());
   }
 
   async connectThings() {
@@ -74,17 +79,6 @@ class Connector {
   async resetTokenAndConnect(client, id) {
     const token = await promisify(client, 'created', client.createSessionToken.bind(client), id);
     return this.createConnection(id, token);
-  }
-
-  async createConnection(id, token) {
-    const client = new Client({
-      hostname: this.settings.hostname,
-      port: this.settings.port,
-      id,
-      token,
-    });
-    await promisify(client, 'ready', client.connect.bind(client));
-    return client;
   }
 
   async listenToCommands(id, client) {
