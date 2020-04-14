@@ -34,7 +34,7 @@ class Connector {
 
   async start() {
     await this.connectClient();
-    await this.connectThings();
+    await this.listenToCommands();
   }
 
   async connectClient() {
@@ -51,34 +51,6 @@ class Connector {
   listenToConnectionStatus() {
     this.client.on('close', () => this.onDisconnectedCb());
     this.client.on('connect', () => this.onReconnectedCb());
-  }
-
-  async connectThings() {
-    const things = await this.listDevices();
-    const connections = await Promise.all(things.map(thing => this.setupThingConnection(thing.id)));
-    this.clientThings = _.chain(connections)
-      .filter(value => value.client)
-      .keyBy('id')
-      .mapValues(value => value.client)
-      .value();
-  }
-
-  async setupThingConnection(id) {
-    const gatewayClient = await this.createConnection(this.settings.uuid, this.settings.token);
-    try {
-      const thingClient = await this.resetTokenAndConnect(gatewayClient, id);
-      await this.listenToCommands();
-      return { id, client: thingClient };
-    } catch (err) {
-      return { id };
-    } finally {
-      gatewayClient.close();
-    }
-  }
-
-  async resetTokenAndConnect(client, id) {
-    const token = await promisify(client, 'created', client.createSessionToken.bind(client), id);
-    return this.createConnection(id, token);
   }
 
   async listenToCommands() {
