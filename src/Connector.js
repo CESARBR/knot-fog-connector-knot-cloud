@@ -103,8 +103,7 @@ class Connector {
   }
 
   async updateSchema(id, schemaList) {
-    const thingClient = this.clientThings[id];
-    return promisify(thingClient, 'updated', thingClient.updateSchema.bind(thingClient), schemaList);
+    return this.client.updateSchema(id, schemaList);
   }
 
   // Cloud to device (fog)
