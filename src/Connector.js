@@ -1,16 +1,6 @@
 import Client from '@cesarbr/knot-cloud-sdk-js-amqp';
 import _ from 'lodash';
 
-function promisify(client, event, method, ...args) {
-  return new Promise((resolve, reject) => {
-    method(...args);
-    client.once(event, ret => resolve(ret));
-    client.once('error', (err) => {
-      reject(new Error(err));
-    });
-  });
-}
-
 function mapCloudDeviceToConnectorDevice(device) {
   return {
     id: device.id,
@@ -23,7 +13,6 @@ class Connector {
   constructor(settings) {
     this.settings = settings;
     this.client = null;
-    this.clientThings = {};
 
     this.onDataRequestedCb = _.noop();
     this.onDataUpdatedCb = _.noop();
@@ -65,17 +54,9 @@ class Connector {
     });
   }
 
-  async addDevice(device) {
-    const properties = device;
-    properties.type = 'knot:thing';
-    const newDevice = await promisify(this.client, 'registered', this.client.register.bind(this.client), properties);
-    const client = await this.createConnection(
-      newDevice.knot.id,
-      newDevice.token,
-    );
-    this.clientThings[newDevice.knot.id] = client;
-    this.listenToCommands();
-    return { id: newDevice.knot.id, token: newDevice.token };
+  async addDevice({ id, name }) {
+    await this.client.register(id, name);
+    return { id, token: this.settings.token };
   }
 
   // eslint-disable-next-line no-unused-vars
