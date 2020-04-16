@@ -67,7 +67,7 @@ class Connector {
     const gatewayClient = await this.createConnection(this.settings.uuid, this.settings.token);
     try {
       const thingClient = await this.resetTokenAndConnect(gatewayClient, id);
-      await this.listenToCommands(id, thingClient);
+      await this.listenToCommands();
       return { id, client: thingClient };
     } catch (err) {
       return { id };
@@ -81,19 +81,15 @@ class Connector {
     return this.createConnection(id, token);
   }
 
-  async listenToCommands(id, client) {
-    client.on('command', (cmd) => {
-      const { name, args } = cmd.payload;
-      switch (name) {
-        case 'getData':
-          this.onDataRequestedCb(id, args);
-          break;
-        case 'setData':
-          this.onDataUpdatedCb(id, args);
-          break;
-        default:
-          throw Error(`Unrecognized command ${name}`);
-      }
+  async listenToCommands() {
+    await this.client.on('getData', async (cmd) => {
+      const { id, sensorIds } = cmd;
+      this.onDataRequestedCb(id, sensorIds);
+    });
+
+    await this.client.on('setData', async (cmd) => {
+      const { id, data } = cmd;
+      this.onDataUpdatedCb(id, data);
     });
   }
 
@@ -106,7 +102,7 @@ class Connector {
       newDevice.token,
     );
     this.clientThings[newDevice.knot.id] = client;
-    this.listenToCommands(newDevice.knot.id, client);
+    this.listenToCommands();
     return { id: newDevice.knot.id, token: newDevice.token };
   }
 
