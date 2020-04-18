@@ -28,18 +28,12 @@ class Connector {
 
   async connectClient() {
     this.client = await this.createConnection();
-    this.listenToConnectionStatus();
   }
 
   async createConnection() {
     const client = new Client(this.settings);
     await client.connect();
     return client;
-  }
-
-  listenToConnectionStatus() {
-    this.client.on('close', () => this.onDisconnectedCb());
-    this.client.on('connect', () => this.onReconnectedCb());
   }
 
   async listenToCommands() {
