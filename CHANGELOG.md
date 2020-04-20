@@ -1,3 +1,15 @@
+# [2.1.0](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v2.0.1...v2.1.0)
+
+### Features
+
+- Adapt to use AMQP operations provided by the [Client SDK](https://github.com/CESARBR/knot-cloud-sdk-js-amqp) instead of WebSocket ones.
+- Disable device unregistered and connection callbacks usage.
+
+### Bug Fixes
+
+- Update dev dependencies and configs.
+- Fix vulnerabilities issues.
+
 # [2.0.1](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v2.0.0...v2.0.1)
 
 ### Bug Fixes
