@@ -24,15 +24,15 @@ class Connector {
     this.settings = settings;
     this.client = null;
     this.clientThings = {};
-  }
 
-  async start() {
     this.onDataRequestedCb = _.noop();
     this.onDataUpdatedCb = _.noop();
     this.onDeviceUnregisteredCb = _.noop();
     this.onDisconnectedCb = _.noop();
     this.onReconnectedCb = _.noop();
+  }
 
+  async start() {
     await this.connectGateway();
     await this.connectThings();
   }
