@@ -72,7 +72,7 @@ class Connector {
   // eslint-disable-next-line no-unused-vars
   async authDevice(id, token) {
     const devices = await this.listDevices();
-    return !!devices.find((device) => device.id === id);
+    return devices.some((device) => device.id === id);
   }
 
   async removeDevice(id) {
@@ -84,8 +84,8 @@ class Connector {
   }
 
   async listDevices() {
-    const { devices } = await this.client.getDevices();
-    return devices.map(mapCloudDeviceToConnectorDevice) || [];
+    const { devices = [] } = await this.client.getDevices();
+    return devices.map(mapCloudDeviceToConnectorDevice);
   }
 
   // Device (fog) to cloud
@@ -130,4 +130,4 @@ class Connector {
   }
 }
 
-export { Connector }; // eslint-disable-line import/prefer-default-export
+export default Connector;
