@@ -19,6 +19,8 @@ class Connector {
     this.onDeviceUnregisteredCb = _.noop();
     this.onDisconnectedCb = _.noop();
     this.onReconnectedCb = _.noop();
+
+    this.devices = [];
   }
 
   async start() {
@@ -37,13 +39,22 @@ class Connector {
   }
 
   async listenToCommands() {
-    await this.client.on('getData', async (cmd) => {
-      const { id, sensorIds } = cmd;
+    const { devices = [] } = await this.client.getDevices();
+    this.devices = devices
+      .filter((device) => !!device.schema)
+      .map((device) => device.id);
+
+    await Promise.all(this.devices.map((device) => this.registerListeners(device)));
+  }
+
+  async registerListeners(thingId) {
+    await this.client.on(`device.${thingId}.data.request`, async (msg) => {
+      const { id, sensorIds } = msg;
       this.onDataRequestedCb(id, sensorIds);
     });
 
-    await this.client.on('setData', async (cmd) => {
-      const { id, data } = cmd;
+    await this.client.on(`device.${thingId}.data.update`, async (msg) => {
+      const { id, data } = msg;
       this.onDataUpdatedCb(id, data);
     });
   }
@@ -75,6 +86,10 @@ class Connector {
   }
 
   async updateSchema(id, schemaList) {
+    if (!this.devices.includes(id)) {
+      await this.registerListeners(id);
+      this.devices.push(id);
+    }
     return this.client.updateSchema(id, schemaList);
   }
 
