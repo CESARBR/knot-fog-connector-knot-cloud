@@ -59,6 +59,11 @@ class Connector {
     });
   }
 
+  async clearListeners(thingId) {
+    await this.client.unsubscribe(`device.${thingId}.data.request`);
+    await this.client.unsubscribe(`device.${thingId}.data.update`);
+  }
+
   async addDevice({ id, name }) {
     await this.client.register(id, name);
     return { id, token: this.settings.token };
@@ -71,6 +76,10 @@ class Connector {
   }
 
   async removeDevice(id) {
+    if (this.devices.includes(id)) {
+      await this.clearListeners(id);
+      this.devices.splice(this.devices.findIndex((device) => device === id));
+    }
     await this.client.unregister(id);
   }
 
