@@ -44,7 +44,9 @@ class Connector {
       .filter((device) => !!device.schema)
       .map((device) => device.id);
 
-    await Promise.all(this.devices.map((device) => this.registerListeners(device)));
+    await Promise.all(
+      this.devices.map((device) => this.registerListeners(device))
+    );
   }
 
   async registerListeners(thingId) {
