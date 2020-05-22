@@ -1,14 +1,6 @@
 import Client from '@cesarbr/knot-cloud-sdk-js-amqp';
 import _ from 'lodash';
 
-function mapCloudDeviceToConnectorDevice(device) {
-  return {
-    id: device.id,
-    name: device.name,
-    schema: device.schema,
-  };
-}
-
 class Connector {
   constructor(settings) {
     this.settings = settings;
@@ -16,7 +8,6 @@ class Connector {
 
     this.onDataRequestedCb = _.noop();
     this.onDataUpdatedCb = _.noop();
-    this.onDeviceUnregisteredCb = _.noop();
     this.onDisconnectedCb = _.noop();
     this.onReconnectedCb = _.noop();
 
@@ -66,15 +57,11 @@ class Connector {
     await this.client.unsubscribe(`device.${thingId}.data.update`);
   }
 
+  // Device (fog) to cloud
+
   async addDevice({ id, name }) {
     await this.client.register(id, name);
     return { id, token: this.settings.token };
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  async authDevice(id, token) {
-    const devices = await this.listDevices();
-    return devices.some((device) => device.id === id);
   }
 
   async removeDevice(id) {
@@ -85,17 +72,6 @@ class Connector {
     await this.client.unregister(id);
   }
 
-  async listDevices() {
-    const { devices = [] } = await this.client.getDevices();
-    return devices.map(mapCloudDeviceToConnectorDevice);
-  }
-
-  // Device (fog) to cloud
-
-  async publishData(id, dataList) {
-    return this.client.publishData(id, dataList);
-  }
-
   async updateSchema(id, schemaList) {
     if (!this.devices.includes(id)) {
       await this.registerListeners(id);
@@ -104,21 +80,20 @@ class Connector {
     return this.client.updateSchema(id, schemaList);
   }
 
+  async publishData(id, dataList) {
+    return this.client.publishData(id, dataList);
+  }
+
   // Cloud to device (fog)
 
-  // cb(event) where event is { id, sensorIds }
+  // cb(id, sensorIds)
   async onDataRequested(cb) {
     this.onDataRequestedCb = cb;
   }
 
-  // cb(event) where event is { id, data }
+  // cb(id, data)
   async onDataUpdated(cb) {
     this.onDataUpdatedCb = cb;
-  }
-
-  // cb(event) where event is { id }
-  async onDeviceUnregistered(cb) {
-    this.onDeviceUnregisteredCb = cb;
   }
 
   // Connection callbacks
