@@ -1,10 +1,9 @@
-import Client from '@cesarbr/knot-cloud-sdk-js-amqp';
 import _ from 'lodash';
 
 class Connector {
-  constructor(settings) {
-    this.settings = settings;
-    this.client = null;
+  constructor(client, token) {
+    this.client = client;
+    this.token = token;
 
     this.onDataRequestedCb = _.noop();
     this.onDataUpdatedCb = _.noop();
@@ -20,13 +19,7 @@ class Connector {
   }
 
   async connectClient() {
-    this.client = await this.createConnection();
-  }
-
-  async createConnection() {
-    const client = new Client(this.settings);
-    await client.connect();
-    return client;
+    await this.client.connect();
   }
 
   async listenToCommands() {
@@ -61,7 +54,7 @@ class Connector {
 
   async addDevice({ id, name }) {
     await this.client.register(id, name);
-    return { id, token: this.settings.token };
+    return { id, token: this.token };
   }
 
   async removeDevice(id) {
