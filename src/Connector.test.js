@@ -258,4 +258,12 @@ describe('Connector', () => {
     client.executeHandler(events.update);
     expect(callback).toHaveBeenCalled();
   });
+
+  test('onDisconnected: should update disconnect handler property when requested for', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    const callback = jest.fn();
+    await connector.onDisconnected(callback);
+    expect(connector.onDisconnectedCb).toBe(callback);
+  });
 });
