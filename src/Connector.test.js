@@ -240,4 +240,22 @@ describe('Connector', () => {
     client.executeHandler(events.request);
     expect(callback).toHaveBeenCalled();
   });
+
+  test('onDataUpdated: should update handler property when requested for', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    const callback = jest.fn();
+    await connector.onDataUpdated(callback);
+    expect(connector.onDataUpdatedCb).toBe(callback);
+  });
+
+  test('onDataUpdated: should execute a update handler when receives a update event', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    const callback = jest.fn();
+    await connector.registerListeners(mockThing.id);
+    await connector.onDataUpdated(callback);
+    client.executeHandler(events.update);
+    expect(callback).toHaveBeenCalled();
+  });
 });
