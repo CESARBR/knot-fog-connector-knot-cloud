@@ -17,6 +17,10 @@ const mockThing = {
   ],
 };
 const mockToken = 'authentication-token';
+const mockData = {
+  sensorId: 0,
+  value: true,
+};
 const events = {
   request: `device.${mockThing.id}.data.request`,
   update: `device.${mockThing.id}.data.update`,
@@ -29,6 +33,7 @@ const errors = {
   addDevice: 'fail to create thing on cloud',
   removeDevice: 'fail to remove thing from cloud',
   updateSchema: 'fail to update thing schema in cloud',
+  publishData: 'fail to publish thing data to cloud',
 };
 
 describe('Connector', () => {
@@ -197,5 +202,24 @@ describe('Connector', () => {
       error = err.message;
     }
     expect(error).toBe(errors.updateSchema);
+  });
+
+  test('publishData: should publish data when connections is ok', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    await connector.publishData(mockThing.id, [mockData]);
+    expect(clientMocks.mockPublishData).toHaveBeenCalled();
+  });
+
+  test("publishData: should fail to publish thing's data when something goes wrong", async () => {
+    const client = new Client({ publishDataErr: errors.publishData });
+    const connector = new Connector(client);
+    let error;
+    try {
+      await connector.publishData(mockThing.id, [mockData]);
+    } catch (err) {
+      error = err.message;
+    }
+    expect(error).toBe(errors.publishData);
   });
 });
