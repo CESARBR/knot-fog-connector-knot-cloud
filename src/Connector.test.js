@@ -27,6 +27,7 @@ const errors = {
   listenToCommands: 'fail to list registered things from cloud',
   registerListeners: 'fail to subscribe on AMQP channel',
   addDevice: 'fail to create thing on cloud',
+  removeDevice: 'fail to remove thing from cloud',
 };
 
 describe('Connector', () => {
@@ -140,5 +141,33 @@ describe('Connector', () => {
       error = err.message;
     }
     expect(error).toBe(errors.addDevice);
+  });
+
+  test('removeDevice: should unregister a device when connection is ok', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    await connector.removeDevice(mockThing.id);
+    expect(clientMocks.mockUnregister).toHaveBeenCalled();
+  });
+
+  test('removeDevice: should unsubscribe listeners when the device was registered', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    connector.devices.push(mockThing.id);
+    await connector.removeDevice(mockThing.id);
+    expect(connector.devices).toEqual([]);
+    expect(clientMocks.mockUnsubscribe).toHaveBeenCalledTimes(2);
+  });
+
+  test('removeDevice: should fail to remove a thing when something goes wrong', async () => {
+    const client = new Client({ unregisterErr: errors.removeDevice });
+    const connector = new Connector(client);
+    let error;
+    try {
+      await connector.removeDevice(mockThing.id);
+    } catch (err) {
+      error = err.message;
+    }
+    expect(error).toBe(errors.removeDevice);
   });
 });
