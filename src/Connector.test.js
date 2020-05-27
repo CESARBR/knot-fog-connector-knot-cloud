@@ -28,6 +28,7 @@ const errors = {
   registerListeners: 'fail to subscribe on AMQP channel',
   addDevice: 'fail to create thing on cloud',
   removeDevice: 'fail to remove thing from cloud',
+  updateSchema: 'fail to update thing schema in cloud',
 };
 
 describe('Connector', () => {
@@ -169,5 +170,32 @@ describe('Connector', () => {
       error = err.message;
     }
     expect(error).toBe(errors.removeDevice);
+  });
+
+  test("updateSchema: should update thing's schema when connection is ok", async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    await connector.updateSchema(mockThing.id, mockThing.schema);
+    expect(clientMocks.mockUpdateSchema).toHaveBeenCalled();
+  });
+
+  test("updateSchema: should register listeners when it's the first schema", async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    await connector.updateSchema(mockThing.id, mockThing.schema);
+    expect(connector.devices).toEqual([mockThing.id]);
+    expect(clientMocks.mockOn).toHaveBeenCalledTimes(2);
+  });
+
+  test("updateSchema: should fail to update thing's schema when something goes wrong", async () => {
+    const client = new Client({ updateSchemaErr: errors.updateSchema });
+    const connector = new Connector(client);
+    let error;
+    try {
+      await connector.updateSchema(mockThing.id, mockThing.schema);
+    } catch (err) {
+      error = err.message;
+    }
+    expect(error).toBe(errors.updateSchema);
   });
 });
