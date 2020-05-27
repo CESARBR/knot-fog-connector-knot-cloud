@@ -222,4 +222,22 @@ describe('Connector', () => {
     }
     expect(error).toBe(errors.publishData);
   });
+
+  test('onDataRequested: should update request handler property when requested for', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    const callback = jest.fn();
+    await connector.onDataRequested(callback);
+    expect(connector.onDataRequestedCb).toBe(callback);
+  });
+
+  test('onDataRequested: should execute request handler when a request event is received', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    const callback = jest.fn();
+    await connector.registerListeners(mockThing.id);
+    await connector.onDataRequested(callback);
+    client.executeHandler(events.request);
+    expect(callback).toHaveBeenCalled();
+  });
 });
