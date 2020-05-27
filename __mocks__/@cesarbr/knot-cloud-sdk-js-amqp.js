@@ -8,6 +8,8 @@ export const mockOn = jest.fn();
 export const mockUnsubscribe = jest.fn();
 
 export default jest.fn().mockImplementation((options = {}) => {
+  const handlers = {};
+
   if (options.connectErr) {
     mockConnect.mockRejectedValue(Error(options.connectErr));
   } else {
@@ -44,17 +46,27 @@ export default jest.fn().mockImplementation((options = {}) => {
     mockPublishData.mockResolvedValue();
   }
 
-  if (options.onErr) {
-    mockOn.mockRejectedValue(Error(options.onErr));
-  } else {
-    mockOn.mockResolvedValue();
-  }
+  mockOn.mockImplementation(async (event, callback) => {
+    if (options.onErr) {
+      throw Error(options.onErr);
+    }
+    handlers[event] = callback;
+  });
 
-  if (options.unsubscribeErr) {
-    mockUnsubscribe.mockRejectedValue(Error(options.unsubscribeErr));
-  } else {
-    mockUnsubscribe.mockResolvedValue();
-  }
+  mockUnsubscribe.mockImplementation(async (event) => {
+    if (options.unsubscribeErr) {
+      throw Error(options.unsubscribeErr);
+    }
+    delete handlers[event];
+  });
+
+  const getHandler = (event) => {
+    return handlers[event] || (() => {});
+  };
+
+  const executeHandler = (event) => {
+    getHandler(event)({});
+  };
 
   return {
     connect: mockConnect,
@@ -65,5 +77,7 @@ export default jest.fn().mockImplementation((options = {}) => {
     publishData: mockPublishData,
     on: mockOn,
     unsubscribe: mockUnsubscribe,
+    getHandler,
+    executeHandler,
   };
 });
