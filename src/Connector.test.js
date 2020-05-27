@@ -16,10 +16,15 @@ const mockThing = {
     },
   ],
 };
+const events = {
+  request: `device.${mockThing.id}.data.request`,
+  update: `device.${mockThing.id}.data.update`,
+};
 
 const errors = {
   connectClient: 'fail to connect to AMQP channel',
   listenToCommands: 'fail to list registered things from cloud',
+  registerListeners: 'fail to subscribe on AMQP channel',
 };
 
 describe('Connector', () => {
@@ -84,5 +89,31 @@ describe('Connector', () => {
       error = err.message;
     }
     expect(error).toBe(errors.listenToCommands);
+  });
+
+  test('registerListeners: should register listeners when there is no error while subscribing consumers', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    await connector.registerListeners(mockThing.id);
+    expect(clientMocks.mockOn).toHaveBeenCalledWith(
+      events.request,
+      client.getHandler(events.request)
+    );
+    expect(clientMocks.mockOn).toHaveBeenCalledWith(
+      events.update,
+      client.getHandler(events.update)
+    );
+  });
+
+  test('registerListeners: should fail to subscribe handler when something goes wrong', async () => {
+    const client = new Client({ onErr: errors.registerListeners });
+    const connector = new Connector(client);
+    let error;
+    try {
+      await connector.registerListeners(mockThing.id);
+    } catch (err) {
+      error = err.message;
+    }
+    expect(error).toBe(errors.registerListeners);
   });
 });
