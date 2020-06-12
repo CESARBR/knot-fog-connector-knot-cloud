@@ -784,10 +784,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@cesarbr/knot-cloud-sdk-js-amqp@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@cesarbr/knot-cloud-sdk-js-amqp/-/knot-cloud-sdk-js-amqp-1.0.1.tgz#a64645873b99abdb6b37e25ef1269c6e065ac123"
-  integrity sha512-undRzIz5IpXpLUC25jYbfbOGFdkpnnBnV0JtVLj6LXLl4BR0fFxk6pl10H1fwSRDJ0TfT5UDjqBsuJQ5o37u4Q==
+"@cesarbr/knot-cloud-sdk-js-amqp@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@cesarbr/knot-cloud-sdk-js-amqp/-/knot-cloud-sdk-js-amqp-2.0.0.tgz#a2f8461c6ced516745e1dea21ec1293d08bc7b4a"
+  integrity sha512-JgyqaanMwVdqMVEpwcKUf6qJ6T6cRmvdT6u+72ZVhNnsRNLqXBLfpViEv3OEgY44YjHMBfGt95upSZWriXzvbQ==
   dependencies:
     amqplib "^0.5.5"
     uniqid "^5.2.0"
