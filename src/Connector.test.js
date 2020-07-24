@@ -16,6 +16,7 @@ const mockThing = {
     },
   ],
 };
+const mockToken = 'authentication-token';
 const events = {
   request: `device.${mockThing.id}.data.request`,
   update: `device.${mockThing.id}.data.update`,
@@ -25,6 +26,7 @@ const errors = {
   connectClient: 'fail to connect to AMQP channel',
   listenToCommands: 'fail to list registered things from cloud',
   registerListeners: 'fail to subscribe on AMQP channel',
+  addDevice: 'fail to create thing on cloud',
 };
 
 describe('Connector', () => {
@@ -115,5 +117,28 @@ describe('Connector', () => {
       error = err.message;
     }
     expect(error).toBe(errors.registerListeners);
+  });
+
+  test('addDevice: should register a new device when connection is ok', async () => {
+    const client = new Client();
+    const connector = new Connector(client, mockToken);
+    const response = await connector.addDevice({
+      id: mockThing.id,
+      name: mockThing.name,
+    });
+    expect(clientMocks.mockRegister).toHaveBeenCalled();
+    expect(response).toMatchObject({ id: mockThing.id, token: mockToken });
+  });
+
+  test('addDevice: should fail to add a new thing when something goes wrong', async () => {
+    const client = new Client({ registerErr: errors.addDevice });
+    const connector = new Connector(client);
+    let error;
+    try {
+      await connector.addDevice({ id: mockThing.id, name: mockThing.name });
+    } catch (err) {
+      error = err.message;
+    }
+    expect(error).toBe(errors.addDevice);
   });
 });
