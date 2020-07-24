@@ -1,14 +1,13 @@
-import _ from 'lodash';
-
 class Connector {
   constructor(client, token) {
     this.client = client;
     this.token = token;
 
-    this.onDataRequestedCb = _.noop();
-    this.onDataUpdatedCb = _.noop();
-    this.onDisconnectedCb = _.noop();
-    this.onReconnectedCb = _.noop();
+    const noop = () => undefined;
+    this.onDataRequestedCb = noop;
+    this.onDataUpdatedCb = noop;
+    this.onDisconnectedCb = noop;
+    this.onReconnectedCb = noop;
 
     this.devices = [];
   }

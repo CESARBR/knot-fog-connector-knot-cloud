@@ -38,8 +38,7 @@
     "rollup-plugin-babel": "^4.4.0"
   },
   "dependencies": {
-    "@cesarbr/knot-cloud-sdk-js-amqp": "^2.0.0",
-    "lodash": "^4.17.13"
+    "@cesarbr/knot-cloud-sdk-js-amqp": "^2.0.0"
   },
   "pre-commit": [
     "lint"
