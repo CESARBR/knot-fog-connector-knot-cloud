@@ -6,6 +6,7 @@ class Connector {
     const noop = () => undefined;
     this.onDataRequestedCb = noop;
     this.onDataUpdatedCb = noop;
+    this.onConfigUpdatedCb = noop;
     this.onDisconnectedCb = noop;
     this.onReconnectedCb = noop;
 
@@ -30,6 +31,11 @@ class Connector {
     await Promise.all(
       this.devices.map((device) => this.registerListeners(device))
     );
+
+    await this.client.on(`device.config.updated`, async (msg) => {
+      const { id, config } = msg;
+      this.onConfigUpdatedCb(id, config);
+    });
   }
 
   async registerListeners(thingId) {
@@ -86,6 +92,11 @@ class Connector {
   // cb(id, data)
   async onDataUpdated(cb) {
     this.onDataUpdatedCb = cb;
+  }
+
+  // cb(id, config)
+  async onConfigUpdated(cb) {
+    this.onConfigUpdatedCb = cb;
   }
 
   // Connection callbacks
