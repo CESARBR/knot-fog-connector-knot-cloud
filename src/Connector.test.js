@@ -24,6 +24,7 @@ const mockData = {
 const events = {
   request: `device.${mockThing.id}.data.request`,
   update: `device.${mockThing.id}.data.update`,
+  configUpdated: `device.config.updated`,
 };
 
 const errors = {
@@ -84,7 +85,7 @@ describe('Connector', () => {
     expect(connector.devices).toEqual([mockThing.id]);
     expect(clientMocks.mockGetDevices).toHaveBeenCalled();
     expect(clientMocks.mockOn).toHaveBeenCalledTimes(
-      registeredDevices.length * 2
+      registeredDevices.length * 2 + 1
     );
   });
 
@@ -256,6 +257,16 @@ describe('Connector', () => {
     await connector.registerListeners(mockThing.id);
     await connector.onDataUpdated(callback);
     client.executeHandler(events.update);
+    expect(callback).toHaveBeenCalled();
+  });
+
+  test('onConfigUpdated: should execute a callback when receives a config updated event', async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    const callback = jest.fn();
+    await connector.listenToCommands();
+    await connector.onConfigUpdated(callback);
+    client.executeHandler(events.configUpdated);
     expect(callback).toHaveBeenCalled();
   });
 
