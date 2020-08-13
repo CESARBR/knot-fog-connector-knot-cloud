@@ -78,6 +78,14 @@ class Connector {
     return this.client.updateSchema(id, schemaList);
   }
 
+  async updateConfig(id, configList) {
+    if (!this.devices.includes(id)) {
+      await this.registerListeners(id);
+      this.devices.push(id);
+    }
+    return this.client.updateConfig(id, configList);
+  }
+
   async publishData(id, dataList) {
     return this.client.publishData(id, dataList);
   }

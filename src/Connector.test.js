@@ -15,6 +15,15 @@ const mockThing = {
       name: 'bool-sensor',
     },
   ],
+  config: [
+    {
+      sensorId: 0,
+      change: true,
+      timeSec: 10,
+      lowerThreshold: 1000,
+      upperThreshold: 3000,
+    },
+  ],
 };
 const mockToken = 'authentication-token';
 const mockData = {
@@ -34,6 +43,7 @@ const errors = {
   addDevice: 'fail to create thing on cloud',
   removeDevice: 'fail to remove thing from cloud',
   updateSchema: 'fail to update thing schema in cloud',
+  updateConfig: 'fail to update thing config in cloud',
   publishData: 'fail to publish thing data to cloud',
 };
 
@@ -43,6 +53,7 @@ describe('Connector', () => {
     clientMocks.mockRegister.mockClear();
     clientMocks.mockUnregister.mockClear();
     clientMocks.mockUpdateSchema.mockClear();
+    clientMocks.mockUpdateConfig.mockClear();
     clientMocks.mockGetDevices.mockClear();
     clientMocks.mockPublishData.mockClear();
     clientMocks.mockOn.mockClear();
@@ -203,6 +214,33 @@ describe('Connector', () => {
       error = err.message;
     }
     expect(error).toBe(errors.updateSchema);
+  });
+
+  test("updateConfig: should update thing's config when connection is ok", async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    await connector.updateConfig(mockThing.id, mockThing.config);
+    expect(clientMocks.mockUpdateConfig).toHaveBeenCalled();
+  });
+
+  test("updateConfig: should register listeners when it's the first config", async () => {
+    const client = new Client();
+    const connector = new Connector(client);
+    await connector.updateConfig(mockThing.id, mockThing.config);
+    expect(connector.devices).toEqual([mockThing.id]);
+    expect(clientMocks.mockOn).toHaveBeenCalledTimes(2);
+  });
+
+  test("updateConfig: should fail to update thing's config when something goes wrong", async () => {
+    const client = new Client({ updateConfigErr: errors.updateConfig });
+    const connector = new Connector(client);
+    let error;
+    try {
+      await connector.updateConfig(mockThing.id, mockThing.config);
+    } catch (err) {
+      error = err.message;
+    }
+    expect(error).toBe(errors.updateConfig);
   });
 
   test('publishData: should publish data when connections is ok', async () => {

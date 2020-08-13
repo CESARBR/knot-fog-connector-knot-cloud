@@ -2,6 +2,7 @@ export const mockConnect = jest.fn();
 export const mockRegister = jest.fn();
 export const mockUnregister = jest.fn();
 export const mockUpdateSchema = jest.fn();
+export const mockUpdateConfig = jest.fn();
 export const mockGetDevices = jest.fn();
 export const mockPublishData = jest.fn();
 export const mockOn = jest.fn();
@@ -32,6 +33,12 @@ export default jest.fn().mockImplementation((options = {}) => {
     mockUpdateSchema.mockRejectedValue(Error(options.updateSchemaErr));
   } else {
     mockUpdateSchema.mockResolvedValue();
+  }
+
+  if (options.updateConfigErr) {
+    mockUpdateConfig.mockRejectedValue(Error(options.updateConfigErr));
+  } else {
+    mockUpdateConfig.mockResolvedValue();
   }
 
   if (options.getDevicesErr) {
@@ -73,6 +80,7 @@ export default jest.fn().mockImplementation((options = {}) => {
     register: mockRegister,
     unregister: mockUnregister,
     updateSchema: mockUpdateSchema,
+    updateConfig: mockUpdateConfig,
     getDevices: mockGetDevices,
     publishData: mockPublishData,
     on: mockOn,
