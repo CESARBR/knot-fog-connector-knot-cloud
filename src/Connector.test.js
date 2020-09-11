@@ -6,22 +6,21 @@ jest.mock('@cesarbr/knot-cloud-sdk-js-amqp');
 const mockThing = {
   id: 'abcdef1234568790',
   name: 'my-device',
-  schema: [
-    {
-      sensorId: 0,
-      typeId: 65521,
-      valueType: 3,
-      unit: 0,
-      name: 'bool-sensor',
-    },
-  ],
   config: [
     {
       sensorId: 0,
-      change: true,
-      timeSec: 10,
-      lowerThreshold: 1000,
-      upperThreshold: 3000,
+      schema: {
+        typeId: 65521,
+        valueType: 3,
+        unit: 0,
+        name: 'bool-sensor',
+      },
+      event: {
+        change: true,
+        timeSec: 10,
+        lowerThreshold: 1000,
+        upperThreshold: 3000,
+      },
     },
   ],
 };
@@ -42,7 +41,6 @@ const errors = {
   registerListeners: 'fail to subscribe on AMQP channel',
   addDevice: 'fail to create thing on cloud',
   removeDevice: 'fail to remove thing from cloud',
-  updateSchema: 'fail to update thing schema in cloud',
   updateConfig: 'fail to update thing config in cloud',
   publishData: 'fail to publish thing data to cloud',
 };
@@ -52,7 +50,6 @@ describe('Connector', () => {
     clientMocks.mockConnect.mockClear();
     clientMocks.mockRegister.mockClear();
     clientMocks.mockUnregister.mockClear();
-    clientMocks.mockUpdateSchema.mockClear();
     clientMocks.mockUpdateConfig.mockClear();
     clientMocks.mockGetDevices.mockClear();
     clientMocks.mockPublishData.mockClear();
@@ -187,33 +184,6 @@ describe('Connector', () => {
       error = err.message;
     }
     expect(error).toBe(errors.removeDevice);
-  });
-
-  test("updateSchema: should update thing's schema when connection is ok", async () => {
-    const client = new Client();
-    const connector = new Connector(client);
-    await connector.updateSchema(mockThing.id, mockThing.schema);
-    expect(clientMocks.mockUpdateSchema).toHaveBeenCalled();
-  });
-
-  test("updateSchema: should register listeners when it's the first schema", async () => {
-    const client = new Client();
-    const connector = new Connector(client);
-    await connector.updateSchema(mockThing.id, mockThing.schema);
-    expect(connector.devices).toEqual([mockThing.id]);
-    expect(clientMocks.mockOn).toHaveBeenCalledTimes(2);
-  });
-
-  test("updateSchema: should fail to update thing's schema when something goes wrong", async () => {
-    const client = new Client({ updateSchemaErr: errors.updateSchema });
-    const connector = new Connector(client);
-    let error;
-    try {
-      await connector.updateSchema(mockThing.id, mockThing.schema);
-    } catch (err) {
-      error = err.message;
-    }
-    expect(error).toBe(errors.updateSchema);
   });
 
   test("updateConfig: should update thing's config when connection is ok", async () => {
