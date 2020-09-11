@@ -25,7 +25,7 @@ class Connector {
   async listenToCommands() {
     const { devices = [] } = await this.client.getDevices();
     this.devices = devices
-      .filter((device) => !!device.schema)
+      .filter((device) => !!device.config)
       .map((device) => device.id);
 
     await Promise.all(
@@ -68,14 +68,6 @@ class Connector {
       this.devices.splice(this.devices.findIndex((device) => device === id));
     }
     await this.client.unregister(id);
-  }
-
-  async updateSchema(id, schemaList) {
-    if (!this.devices.includes(id)) {
-      await this.registerListeners(id);
-      this.devices.push(id);
-    }
-    return this.client.updateSchema(id, schemaList);
   }
 
   async updateConfig(id, configList) {
