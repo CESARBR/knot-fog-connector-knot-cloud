@@ -1,3 +1,12 @@
+# [4.0.0](https://github.com/CESARBR/knot-cloud-sdk-js-amqp/compare/v3.0.0...v4.0.0)
+
+## Feature
+### Update event
+
+  - Update update config event to support the operation documented [here](https://github.com/CESARBR/knot-babeltower/blob/master/docs/events.md)
+  - Remove update schema event
+
+
 # [3.0.0](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v2.1.0...v3.0.0)
 
 ### Features
