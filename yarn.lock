@@ -854,10 +854,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cesarbr/knot-cloud-sdk-js-amqp@^2.0.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@cesarbr/knot-cloud-sdk-js-amqp/-/knot-cloud-sdk-js-amqp-2.1.0.tgz#20c1102da78030f1c864a25a4950c6d57f1208a5"
-  integrity sha512-7lfbq1e83RCTNdotTZwzkG8eRhCxn8Ce1ogxXANuN0/htFCnFZw+kVedTDGoYE6hLuej7aAxLAv3rVmpTlcf4Q==
+"@cesarbr/knot-cloud-sdk-js-amqp@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@cesarbr/knot-cloud-sdk-js-amqp/-/knot-cloud-sdk-js-amqp-3.0.1.tgz#46599946cad02620b422ca12284386967473119a"
+  integrity sha512-QbIVjn52fnLF+OldU7jH0VKsLEXKQOBpFn/Z+HhyRse5gbxx6mcAnXx2bZAPDSnvl9wAVRAMiwyha4ldYZY9hA==
   dependencies:
     amqp-connection-manager "^3.2.0"
     amqplib "^0.5.5"

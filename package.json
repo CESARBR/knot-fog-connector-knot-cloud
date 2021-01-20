@@ -1,6 +1,6 @@
 {
   "name": "@cesarbr/knot-fog-connector-knot-cloud",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "KNoT fog connector with KNoT Cloud",
   "repository": {
     "type": "git",
@@ -38,7 +38,7 @@
     "rollup-plugin-babel": "^4.4.0"
   },
   "dependencies": {
-    "@cesarbr/knot-cloud-sdk-js-amqp": "^2.0.0"
+    "@cesarbr/knot-cloud-sdk-js-amqp": "^3.0.1"
   },
   "pre-commit": [
     "lint"

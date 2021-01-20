@@ -1,3 +1,9 @@
+# [5.0.0](https://github.com/CESARBR/knot-fog-connector-knot-cloud/compare/v4.0.0...v5.0.0)
+
+### Features
+
+- Update the [AMQP SDK](https://github.com/CESARBR/knot-cloud-sdk-js-amqp) library to v3.0.1.
+
 # [4.0.0](https://github.com/CESARBR/knot-cloud-sdk-js-amqp/compare/v3.0.0...v4.0.0)
 
 ## Feature
